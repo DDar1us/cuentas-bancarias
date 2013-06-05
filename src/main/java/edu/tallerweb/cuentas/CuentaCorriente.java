@@ -19,7 +19,7 @@ package edu.tallerweb.cuentas;
 public class CuentaCorriente extends AbstractCuenta {
 	private Double cuenta = 0.0;
 	private Double descubiertoTotal = 0.0;
-	private Double Descubierto = 0.0;
+	private Double descubierto = 0.0;
 	private Double descubiertoLimite = 0.0;
 	/**
 	 * Toda cuenta corriente se inicia con un límite total
@@ -30,7 +30,6 @@ public class CuentaCorriente extends AbstractCuenta {
 		this.descubiertoTotal = descubiertoTotal;
 		this.descubiertoLimite = descubiertoTotal;
 	}
-	
 	/**
 	 * Todo depósito deberá cubrir primero el descubierto,
 	 * si lo hubiera, y luego contar para el cuenta de la
@@ -45,11 +44,10 @@ public class CuentaCorriente extends AbstractCuenta {
 			if (monto < this.descubiertoTotal) {
 				this.descubiertoTotal = this.descubiertoTotal + monto;
 			}
-			else
-			{
-				this.Descubierto = this.descubiertoLimite - this.descubiertoTotal;
-				this.cuenta = monto - this.Descubierto;
-				this.descubiertoTotal = this.descubiertoTotal + this.Descubierto;
+			else {
+				this.descubierto = this.descubiertoLimite - this.descubiertoTotal;
+				this.cuenta = monto - this.descubierto;
+				this.descubiertoTotal = this.descubiertoTotal + this.descubierto;
 			}
 		}
 		if (this.descubiertoTotal == this.descubiertoLimite) {
@@ -68,22 +66,21 @@ public class CuentaCorriente extends AbstractCuenta {
 		if (monto < 0.0) {
 			throw new CuentaBancariaException(null);
 		}
-		if (monto > this.cuenta) {		
-			this.Descubierto = monto - this.cuenta;
-			if (this.descubiertoTotal < this.Descubierto || ((this.Descubierto/20.0) + this.Descubierto) > this.descubiertoTotal) {
+		if (monto > this.cuenta) {
+			this.descubierto = monto - this.cuenta;
+			if (this.descubiertoTotal < this.descubierto || 
+				((this.descubierto / 20.0) + this.descubierto) > this.descubiertoTotal) {
 				throw new CuentaBancariaException(null);
 			}
 			else {
-				this.descubiertoTotal = this.descubiertoTotal - this.Descubierto - (this.Descubierto/20.0);
+				this.descubiertoTotal = this.descubiertoTotal - this.descubierto - (this.descubierto/20.0);
 			}
 			this.cuenta = 0.0;
-		}
-		else
-		{	
+		} 
+		else {
 		this.cuenta = this.cuenta - monto;
 		}
 	}
-
 	/**
 	 * Permite saber el cuenta de la cuenta
 	 * @return el cuenta de la cuenta
@@ -91,13 +88,11 @@ public class CuentaCorriente extends AbstractCuenta {
 	public Double getSaldo() {
 		return this.cuenta;
 	}
-	
 	/**
 	 * Permite saber el cuenta en descubierto
 	 * @return el descubierto de la cuenta
 	 */
-	public Double getDescubierto() {
+	public Double getdescubierto() {
 		return this.descubiertoTotal;
 	}
-
 }

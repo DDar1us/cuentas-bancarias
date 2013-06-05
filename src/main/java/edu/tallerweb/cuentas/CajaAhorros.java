@@ -25,7 +25,7 @@ public class CajaAhorros extends AbstractCuenta {
 	 * @param monto a extraer
 	 */
 	public void extraer(final Double monto) {
-		if (monto < 0.0){
+		if (monto < 0.0) {
 			throw new CuentaBancariaException(null);
 		}
 		if (monto > cuenta) {
