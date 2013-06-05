@@ -91,7 +91,7 @@ public class CuentaCorriente extends AbstractCuenta {
 	 * Permite saber el cuenta en descubierto
 	 * @return el descubierto de la cuenta
 	 */
-	public Double getdescubierto() {
+	public Double getDescubierto() {
 		return this.descubiertoTotal;
 	}
 }
