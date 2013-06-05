@@ -20,6 +20,7 @@ public class CuentaCorriente {
 	private Double cuenta=0.0;
 	private Double descubiertoTotal=0.0;
 	private Double Descubierto=0.0;
+	private Double descubiertoLimite=0.0;
 	/**
 	 * Toda cuenta corriente se inicia con un límite total
 	 * para el descubierto.
@@ -27,6 +28,7 @@ public class CuentaCorriente {
 	 */
 	public CuentaCorriente(final Double descubiertoTotal) {
 		this.descubiertoTotal=descubiertoTotal;
+		this.descubiertoLimite=descubiertoTotal;
 	}
 	
 	/**
@@ -39,17 +41,18 @@ public class CuentaCorriente {
 		if(monto<0.0){
 			throw new CuentaBancariaException(null);
 		}
-		if(this.Descubierto>0.0){
-			if(monto<this.Descubierto){
-				this.Descubierto=this.Descubierto-monto;
+		if(this.descubiertoTotal<descubiertoLimite){
+			if(monto<this.descubiertoTotal){
+				this.descubiertoTotal=this.descubiertoTotal+monto;
 			}
 			else
 			{
+				this.Descubierto=this.descubiertoLimite-this.descubiertoTotal;
 				this.cuenta=monto-this.Descubierto;
-				this.Descubierto=0.0;
+				this.descubiertoTotal=this.descubiertoTotal+this.Descubierto;
 			}
 		}
-		if(this.Descubierto==0.0){
+		if(this.descubiertoTotal==this.descubiertoLimite){
 			this.cuenta=monto+this.cuenta;
 		}
 	}
@@ -68,11 +71,10 @@ public class CuentaCorriente {
 		if(monto>this.cuenta){		
 			this.Descubierto=monto-this.cuenta;
 			if(this.descubiertoTotal<this.Descubierto||((this.Descubierto/20.0)+this.Descubierto)>this.descubiertoTotal){
-				this.Descubierto=0.0;
 				throw new CuentaBancariaException(null);
 			}
 			else{
-				this.Descubierto=this.Descubierto+(this.Descubierto/20.0);
+				this.descubiertoTotal=this.descubiertoTotal-this.Descubierto-(this.Descubierto/20.0);
 			}
 			this.cuenta=0.0;
 		}
@@ -95,7 +97,7 @@ public class CuentaCorriente {
 	 * @return el descubierto de la cuenta
 	 */
 	public Double getDescubierto() {
-		return this.Descubierto;
+		return this.descubiertoTotal;
 	}
 
 }
