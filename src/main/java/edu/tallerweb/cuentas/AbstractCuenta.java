@@ -7,7 +7,7 @@ package edu.tallerweb.cuentas;
  * Es probable que la tarea se facilite otorgando una imple-
  * mentación a los métodos proporcionados.
  */
-public abstract class AbstractCuenta extends CajaAhorros {
+public abstract class AbstractCuenta {
 	/**
 	 * Agrega a la cuenta el monto determinado
 	 * @param monto a depositar

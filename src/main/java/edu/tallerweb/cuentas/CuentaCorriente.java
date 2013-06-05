@@ -16,7 +16,7 @@ package edu.tallerweb.cuentas;
  * Pasaremos a deberle al banco $ 105 en total: los $ 100 que
  * nos cubrió, más el 5% adicional sobre el descubierto otorgado.
  */
-public class CuentaCorriente {
+public class CuentaCorriente extends AbstractCuenta {
 	private Double cuenta=0.0;
 	private Double descubiertoTotal=0.0;
 	private Double Descubierto=0.0;

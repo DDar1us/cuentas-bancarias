@@ -6,7 +6,7 @@ package edu.tallerweb.cuentas;
  * cuenta del que se quiere extraer, la operación se debe efectuar
  * correctamente.
  */
-public class CuentaSueldo {
+public class CuentaSueldo extends AbstractCuenta {
 	private Double cuenta=0.0;
 	/**
 	 * No hay reglas adicionales para el depósito
