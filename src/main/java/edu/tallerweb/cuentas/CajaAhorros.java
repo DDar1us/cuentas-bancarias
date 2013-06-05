@@ -8,8 +8,8 @@ package edu.tallerweb.cuentas;
 public class CajaAhorros extends AbstractCuenta {
 	private Double cuenta = 0.0;
 	private Integer interes = 0;
-	private Integer limite = 5;
-	private Double seisPesos = 6.0;
+	private final Integer limite = 5;
+	private final Double seisPesos = 6.0;
 	/**
 	 * No hay reglas adicionales para el depósito
 	 * @param monto a depositar

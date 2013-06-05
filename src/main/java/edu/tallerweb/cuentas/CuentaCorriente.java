@@ -21,7 +21,7 @@ public class CuentaCorriente extends AbstractCuenta {
 	private Double descubiertoTotal = 0.0;
 	private Double descubierto = 0.0;
 	private Double descubiertoLimite = 0.0;
-	private Double cincoXCiento = 20.0;
+	private final Double cincoXCiento = 20.0;
 	/**
 	 * Toda cuenta corriente se inicia con un límite total
 	 * para el descubierto.
