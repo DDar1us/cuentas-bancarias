@@ -8,6 +8,8 @@ package edu.tallerweb.cuentas;
 public class CajaAhorros extends AbstractCuenta {
 	private Double cuenta = 0.0;
 	private Integer interes = 0;
+	private Integer limite = 5;
+	private Double seisPesos = 6.0;
 	/**
 	 * No hay reglas adicionales para el depósito
 	 * @param monto a depositar
@@ -33,12 +35,12 @@ public class CajaAhorros extends AbstractCuenta {
 		}
 		this.cuenta = this.cuenta - monto;
 		this.interes++;
-		if (this.interes > 5) {
-			if ((this.cuenta - 6.0) < 0.0) {
+		if (this.interes > this.limite) {
+			if ((this.cuenta - this.seisPesos) < 0.0) {
 				this.cuenta = this.cuenta + monto;
 				throw new CuentaBancariaException(null);
 			}
-			this.cuenta = this.cuenta - 6.0;
+			this.cuenta = this.cuenta - this.seisPesos;
 		}
 	}
 

@@ -21,6 +21,7 @@ public class CuentaCorriente extends AbstractCuenta {
 	private Double descubiertoTotal = 0.0;
 	private Double descubierto = 0.0;
 	private Double descubiertoLimite = 0.0;
+	private Double cincoXCiento= 20.0;
 	/**
 	 * Toda cuenta corriente se inicia con un límite total
 	 * para el descubierto.
@@ -69,11 +70,11 @@ public class CuentaCorriente extends AbstractCuenta {
 		if (monto > this.cuenta) {
 			this.descubierto = monto - this.cuenta;
 			if (this.descubiertoTotal < this.descubierto || 
-				((this.descubierto / 20.0) + this.descubierto) > this.descubiertoTotal) {
+				((this.descubierto / this.cincoXCiento) + this.descubierto) > this.descubiertoTotal) {
 				throw new CuentaBancariaException(null);
 			}
 			else {
-				this.descubiertoTotal = this.descubiertoTotal - this.descubierto - (this.descubierto/20.0);
+				this.descubiertoTotal = this.descubiertoTotal - this.descubierto - (this.descubierto / this.cincoXCiento);
 			}
 			this.cuenta = 0.0;
 		} 
