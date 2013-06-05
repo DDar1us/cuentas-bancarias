@@ -17,24 +17,30 @@ package edu.tallerweb.cuentas;
  * nos cubrió, más el 5% adicional sobre el descubierto otorgado.
  */
 public class CuentaCorriente {
-
+	private Double cuenta;
+	private Double descubiertoTotal;
+	private Double Descubierto;
 	/**
 	 * Toda cuenta corriente se inicia con un límite total
 	 * para el descubierto.
 	 * @param descubiertoTotal
 	 */
 	public CuentaCorriente(final Double descubiertoTotal) {
-		throw new RuntimeException("No implementado aún");
+		this.descubiertoTotal=descubiertoTotal;
 	}
 	
 	/**
 	 * Todo depósito deberá cubrir primero el descubierto,
-	 * si lo hubiera, y luego contar para el saldo de la
+	 * si lo hubiera, y luego contar para el cuenta de la
 	 * cuenta.
 	 * @param monto a depositar
 	 */
 	public void depositar(final Double monto) {
-		throw new RuntimeException("No implementado aún");
+		this.cuenta=monto+cuenta;
+		if(this.cuenta<this.descubiertoTotal){
+			System.out.println("El deposito es insuficiente al descubierto");
+			this.cuenta=cuenta-monto;
+		}
 	}
 
 	/**
@@ -45,23 +51,35 @@ public class CuentaCorriente {
 	 * @param monto a extraer
 	 */
 	public void extraer(final Double monto) {
-		throw new RuntimeException("No implementado aún");
+		if(monto>this.cuenta){
+			this.Descubierto=monto-cuenta;
+			if(this.descubiertoTotal<this.Descubierto){
+				this.Descubierto=this.Descubierto-this.Descubierto;
+				System.out.println("El descubierto excede el limite");
+				throw new CuentaBancariaException(null);
+			}
+			this.Descubierto=this.Descubierto+((this.Descubierto/20.0)*100);
+			this.cuenta=cuenta-cuenta;
+		}
+		else{	
+		this.cuenta=cuenta-monto;
+		}
 	}
 
 	/**
-	 * Permite saber el saldo de la cuenta
-	 * @return el saldo de la cuenta
+	 * Permite saber el cuenta de la cuenta
+	 * @return el cuenta de la cuenta
 	 */
 	public Double getSaldo() {
-		throw new RuntimeException("No implementado aún");
+		return this.cuenta;
 	}
 	
 	/**
-	 * Permite saber el saldo en descubierto
+	 * Permite saber el cuenta en descubierto
 	 * @return el descubierto de la cuenta
 	 */
 	public Double getDescubierto() {
-		throw new RuntimeException("No implementado aún");
+		return this.Descubierto;
 	}
 
 }
