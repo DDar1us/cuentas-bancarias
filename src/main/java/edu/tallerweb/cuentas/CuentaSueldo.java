@@ -13,6 +13,9 @@ public class CuentaSueldo {
 	 * @param monto a depositar
 	 */
 	public void depositar(final Double monto) {
+		if(monto<0.0){
+			throw new CuentaBancariaException(null);
+		}
 		this.cuenta=monto+cuenta;
 	}
 
@@ -21,6 +24,9 @@ public class CuentaSueldo {
 	 * @param monto a extraer
 	 */
 	public void extraer(final Double monto) {
+		if(monto<0.0){
+			throw new CuentaBancariaException(null);
+		}
 		if(monto>cuenta){
 			throw new CuentaBancariaException(null);
 		}

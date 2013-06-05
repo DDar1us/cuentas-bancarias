@@ -17,9 +17,9 @@ package edu.tallerweb.cuentas;
  * nos cubrió, más el 5% adicional sobre el descubierto otorgado.
  */
 public class CuentaCorriente {
-	private Double cuenta;
-	private Double descubiertoTotal;
-	private Double Descubierto;
+	private Double cuenta=0.0;
+	private Double descubiertoTotal=0.0;
+	private Double Descubierto=0.0;
 	/**
 	 * Toda cuenta corriente se inicia con un límite total
 	 * para el descubierto.
@@ -36,10 +36,21 @@ public class CuentaCorriente {
 	 * @param monto a depositar
 	 */
 	public void depositar(final Double monto) {
-		this.cuenta=monto+cuenta;
-		if(this.cuenta<this.descubiertoTotal){
-			System.out.println("El deposito es insuficiente al descubierto");
-			this.cuenta=cuenta-monto;
+		if(monto<0.0){
+			throw new CuentaBancariaException(null);
+		}
+		if(this.Descubierto>0.0){
+			if(monto<this.Descubierto){
+				this.Descubierto=this.Descubierto-monto;
+			}
+			else
+			{
+				this.cuenta=monto-this.Descubierto;
+				this.Descubierto=0.0;
+			}
+		}
+		if(this.Descubierto==0.0){
+			this.cuenta=monto+this.cuenta;
 		}
 	}
 
@@ -51,18 +62,23 @@ public class CuentaCorriente {
 	 * @param monto a extraer
 	 */
 	public void extraer(final Double monto) {
-		if(monto>this.cuenta){
-			this.Descubierto=monto-cuenta;
-			if(this.descubiertoTotal<this.Descubierto){
-				this.Descubierto=this.Descubierto-this.Descubierto;
-				System.out.println("El descubierto excede el limite");
+		if(monto<0.0){
+			throw new CuentaBancariaException(null);
+		}
+		if(monto>this.cuenta){		
+			this.Descubierto=monto-this.cuenta;
+			if(this.descubiertoTotal<this.Descubierto||(((this.Descubierto/20.0)*100.0)+this.Descubierto)>this.descubiertoTotal){
+				this.Descubierto=0.0;
 				throw new CuentaBancariaException(null);
 			}
-			this.Descubierto=this.Descubierto+((this.Descubierto/20.0)*100);
-			this.cuenta=cuenta-cuenta;
+			else{
+				this.Descubierto=this.Descubierto+((this.Descubierto/20.0)*100.0);
+			}
+			this.cuenta=0.0;
 		}
-		else{	
-		this.cuenta=cuenta-monto;
+		else
+		{	
+		this.cuenta=this.cuenta-monto;
 		}
 	}
 

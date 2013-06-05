@@ -6,14 +6,17 @@ package edu.tallerweb.cuentas;
  * por extracción de $ 6
  */
 public class CajaAhorros {
-	private Double cuenta;
+	private Double cuenta=0.0;
 	private Integer Interes=0; 
 	/**
 	 * No hay reglas adicionales para el depósito
 	 * @param monto a depositar
 	 */
 	public void depositar(final Double monto) {
-		this.cuenta=monto+cuenta;
+		if(monto<0.0){
+			throw new CuentaBancariaException(null);
+		}
+		this.cuenta=monto+this.cuenta;
 	}
 
 	/**
@@ -22,13 +25,20 @@ public class CajaAhorros {
 	 * @param monto a extraer
 	 */
 	public void extraer(final Double monto) {
+		if(monto<0.0){
+			throw new CuentaBancariaException(null);
+		}
 		if(monto>cuenta){
 			throw new CuentaBancariaException(null);
 		}
-		this.cuenta=cuenta-monto;
+		this.cuenta=this.cuenta-monto;
 		this.Interes++;
-		if(this.Interes>5){
-			this.cuenta=cuenta-6;
+		if(this.Interes>=5){
+			if((this.cuenta-6.0)<0.0){
+				this.cuenta=this.cuenta+monto;
+				throw new CuentaBancariaException(null);
+			}
+			this.cuenta=this.cuenta-6.0;
 		}
 	}
 

@@ -8,21 +8,15 @@ package edu.tallerweb.cuentas;
  * mentación a los métodos proporcionados.
  */
 public abstract class AbstractCuenta {
-	private Double cuenta=0.0;
 	/**
 	 * Agrega a la cuenta el monto determinado
 	 * @param monto a depositar
 	 */
-	public abstract void depositar(final Double monto);{
-		Double monto = 4000.0;
-		this.cuenta=monto+cuenta;
-	}
+	public abstract void depositar(final Double monto);
+
 	/**
 	 * Retira de la cuenta el monto determinado
 	 * @param monto a extraer
 	 */
-	public abstract void extraer(final Double monto);{
-		Double monto=3500.0;
-		this.cuenta=cuenta-monto;
-	}
+	public abstract void extraer(final Double monto);
 }
