@@ -67,12 +67,12 @@ public class CuentaCorriente {
 		}
 		if(monto>this.cuenta){		
 			this.Descubierto=monto-this.cuenta;
-			if(this.descubiertoTotal<this.Descubierto||(((this.Descubierto/20.0)*100.0)+this.Descubierto)>this.descubiertoTotal){
+			if(this.descubiertoTotal<this.Descubierto||((this.Descubierto/20.0)+this.Descubierto)>this.descubiertoTotal){
 				this.Descubierto=0.0;
 				throw new CuentaBancariaException(null);
 			}
 			else{
-				this.Descubierto=this.Descubierto+((this.Descubierto/20.0)*100.0);
+				this.Descubierto=this.Descubierto+(this.Descubierto/20.0);
 			}
 			this.cuenta=0.0;
 		}

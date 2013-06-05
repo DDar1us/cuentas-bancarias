@@ -33,7 +33,7 @@ public class CajaAhorros {
 		}
 		this.cuenta=this.cuenta-monto;
 		this.Interes++;
-		if(this.Interes>=5){
+		if(this.Interes>5){
 			if((this.cuenta-6.0)<0.0){
 				this.cuenta=this.cuenta+monto;
 				throw new CuentaBancariaException(null);
