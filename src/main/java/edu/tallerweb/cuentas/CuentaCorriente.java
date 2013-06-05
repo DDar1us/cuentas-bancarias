@@ -17,18 +17,18 @@ package edu.tallerweb.cuentas;
  * nos cubrió, más el 5% adicional sobre el descubierto otorgado.
  */
 public class CuentaCorriente extends AbstractCuenta {
-	private Double cuenta=0.0;
-	private Double descubiertoTotal=0.0;
-	private Double Descubierto=0.0;
-	private Double descubiertoLimite=0.0;
+	private Double cuenta = 0.0;
+	private Double descubiertoTotal = 0.0;
+	private Double Descubierto = 0.0;
+	private Double descubiertoLimite = 0.0;
 	/**
 	 * Toda cuenta corriente se inicia con un límite total
 	 * para el descubierto.
 	 * @param descubiertoTotal
 	 */
 	public CuentaCorriente(final Double descubiertoTotal) {
-		this.descubiertoTotal=descubiertoTotal;
-		this.descubiertoLimite=descubiertoTotal;
+		this.descubiertoTotal = descubiertoTotal;
+		this.descubiertoLimite = descubiertoTotal;
 	}
 	
 	/**
@@ -38,22 +38,22 @@ public class CuentaCorriente extends AbstractCuenta {
 	 * @param monto a depositar
 	 */
 	public void depositar(final Double monto) {
-		if(monto<0.0){
+		if (monto < 0.0) {
 			throw new CuentaBancariaException(null);
 		}
-		if(this.descubiertoTotal<descubiertoLimite){
-			if(monto<this.descubiertoTotal){
-				this.descubiertoTotal=this.descubiertoTotal+monto;
+		if (this.descubiertoTotal < descubiertoLimite) {
+			if (monto < this.descubiertoTotal) {
+				this.descubiertoTotal = this.descubiertoTotal + monto;
 			}
 			else
 			{
-				this.Descubierto=this.descubiertoLimite-this.descubiertoTotal;
-				this.cuenta=monto-this.Descubierto;
-				this.descubiertoTotal=this.descubiertoTotal+this.Descubierto;
+				this.Descubierto = this.descubiertoLimite - this.descubiertoTotal;
+				this.cuenta = monto - this.Descubierto;
+				this.descubiertoTotal = this.descubiertoTotal + this.Descubierto;
 			}
 		}
-		if(this.descubiertoTotal==this.descubiertoLimite){
-			this.cuenta=monto+this.cuenta;
+		if (this.descubiertoTotal == this.descubiertoLimite) {
+			this.cuenta = monto + this.cuenta;
 		}
 	}
 
@@ -65,22 +65,22 @@ public class CuentaCorriente extends AbstractCuenta {
 	 * @param monto a extraer
 	 */
 	public void extraer(final Double monto) {
-		if(monto<0.0){
+		if (monto < 0.0) {
 			throw new CuentaBancariaException(null);
 		}
-		if(monto>this.cuenta){		
-			this.Descubierto=monto-this.cuenta;
-			if(this.descubiertoTotal<this.Descubierto||((this.Descubierto/20.0)+this.Descubierto)>this.descubiertoTotal){
+		if (monto > this.cuenta) {		
+			this.Descubierto = monto - this.cuenta;
+			if (this.descubiertoTotal < this.Descubierto || ((this.Descubierto/20.0) + this.Descubierto) > this.descubiertoTotal) {
 				throw new CuentaBancariaException(null);
 			}
-			else{
-				this.descubiertoTotal=this.descubiertoTotal-this.Descubierto-(this.Descubierto/20.0);
+			else {
+				this.descubiertoTotal = this.descubiertoTotal - this.Descubierto - (this.Descubierto/20.0);
 			}
-			this.cuenta=0.0;
+			this.cuenta = 0.0;
 		}
 		else
 		{	
-		this.cuenta=this.cuenta-monto;
+		this.cuenta = this.cuenta - monto;
 		}
 	}
 
