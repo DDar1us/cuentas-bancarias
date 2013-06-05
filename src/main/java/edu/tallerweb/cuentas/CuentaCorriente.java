@@ -55,7 +55,6 @@ public class CuentaCorriente extends AbstractCuenta {
 			this.cuenta = monto + this.cuenta;
 		}
 	}
-
 	/**
 	 * Se cobrará el 5% de comisión sobre el monto girado
 	 * en descubierto.
@@ -69,8 +68,7 @@ public class CuentaCorriente extends AbstractCuenta {
 		}
 		if (monto > this.cuenta) {
 			this.descubierto = monto - this.cuenta;
-			if (this.descubiertoTotal < this.descubierto || 
-				((this.descubierto / this.cincoXCiento) + this.descubierto) > this.descubiertoTotal) {
+			if (this.descubiertoTotal < this.descubierto ||	((this.descubierto / this.cincoXCiento) + this.descubierto) > this.descubiertoTotal) {
 				throw new CuentaBancariaException(null);
 			}
 			else {
